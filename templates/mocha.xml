@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Mocha</Name>
+  <Repository>ghcr.io/johagan94/mocha:latest</Repository>
+  <Registry>https://github.com/users/johagan94/packages/container/package/mocha</Registry>
+  <Network>bridge</Network>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/johagan94/unraid-templates/issues</Support>
+  <Project>https://github.com/users/johagan94/packages/container/package/mocha</Project>
+  <Overview>Media server for comics, manga, and BDs with Mihon/Tachiyomi extension runtime and multi-tracker wanted lists.</Overview>
+  <Category>MediaApp:Other</Category>
+  <WebUI>http://[IP]:[PORT:25600]</WebUI>
+  <Icon>https://raw.githubusercontent.com/johagan94/unraid-templates/main/icons/mocha.png</Icon>
+  <ExtraParams>--pids-limit 2048</ExtraParams>
+  <Config Name="WebUI Port" Target="25600" Default="25600" Mode="tcp" Description="Port for the Mocha web UI." Type="Port" Display="always" Required="true" Mask="false">25600</Config>
+  <Config Name="Config Directory" Target="/config" Default="/mnt/user/appdata/mocha" Mode="rw" Description="Config, database, extensions, and logs." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/mocha</Config>
+  <Config Name="Comics Library" Target="/data" Default="/mnt/user/data/comics" Mode="rw" Description="Comic library directory." Type="Path" Display="always" Required="false" Mask="false">/mnt/user/data/comics</Config>
+  <Config Name="Manga Library" Target="/manga" Default="/mnt/user/data/manga" Mode="rw" Description="Manga library directory." Type="Path" Display="always" Required="false" Mask="false">/mnt/user/data/manga</Config>
+  <Config Name="Config Dir Override" Target="MOCHA_CONFIGDIR" Default="/config" Mode="" Description="Mocha config directory." Type="Variable" Display="advanced" Required="false" Mask="false">/config</Config>
+  <Config Name="Scan Exclusions" Target="MOCHA_LIBRARIES_SCAN_DIRECTORY_EXCLUSIONS" Default="#recycle,@eaDir" Mode="" Description="Library scan exclusions." Type="Variable" Display="advanced" Required="false" Mask="false">#recycle,@eaDir</Config>
+  <Config Name="Timezone" Target="TZ" Default="Australia/Brisbane" Mode="" Description="Container timezone." Type="Variable" Display="always" Required="false" Mask="false">Australia/Brisbane</Config>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="User ID for file permissions." Type="Variable" Display="advanced" Required="false" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Group ID for file permissions." Type="Variable" Display="advanced" Required="false" Mask="false">100</Config>
+  <TemplateURL>https://raw.githubusercontent.com/johagan94/unraid-templates/main/templates/mocha.xml</TemplateURL>
+</Container>

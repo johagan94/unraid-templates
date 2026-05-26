@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Komga Enhanced</Name>
+  <Repository>ghcr.io/johagan94/komga:latest</Repository>
+  <Registry>https://github.com/users/johagan94/packages/container/package/komga</Registry>
+  <Network>bridge</Network>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/johagan94/unraid-templates/issues</Support>
+  <Project>https://github.com/users/johagan94/packages/container/package/komga</Project>
+  <Overview>Komga-based manga media server with integrated downloads, chapter tracking, backup import, and enhanced metadata.</Overview>
+  <Category>MediaApp:Other</Category>
+  <WebUI>http://[IP]:[PORT:25600]</WebUI>
+  <Icon>https://raw.githubusercontent.com/johagan94/unraid-templates/main/icons/komga.png</Icon>
+  <ExtraParams>--pids-limit 2048</ExtraParams>
+  <Config Name="WebUI Port" Target="25600" Default="25600" Mode="tcp" Description="Port for the Komga Enhanced web UI." Type="Port" Display="always" Required="true" Mask="false">25600</Config>
+  <Config Name="Config Directory" Target="/config" Default="/mnt/user/appdata/komga" Mode="rw" Description="Configuration, database, and logs." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/komga</Config>
+  <Config Name="Manga Library" Target="/data" Default="/mnt/user/data/manga" Mode="rw" Description="Manga library directory." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/data/manga</Config>
+  <Config Name="Config Dir Override" Target="KOMGA_CONFIGDIR" Default="/config" Mode="" Description="Komga configuration directory." Type="Variable" Display="advanced" Required="false" Mask="false">/config</Config>
+  <Config Name="Timezone" Target="TZ" Default="Australia/Brisbane" Mode="" Description="Container timezone." Type="Variable" Display="always" Required="false" Mask="false">Australia/Brisbane</Config>
+  <TemplateURL>https://raw.githubusercontent.com/johagan94/unraid-templates/main/templates/komga.xml</TemplateURL>
+</Container>
