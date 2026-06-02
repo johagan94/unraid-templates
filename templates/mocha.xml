@@ -4,22 +4,58 @@
   <Repository>ghcr.io/johagan94/mocha:latest</Repository>
   <Registry>https://github.com/users/johagan94/packages/container/package/mocha</Registry>
   <Network>bridge</Network>
+  <MyIP/>
+  <Shell>bash</Shell>
   <Privileged>false</Privileged>
-  <Support>https://github.com/johagan94/unraid-templates/issues</Support>
-  <Project>https://github.com/users/johagan94/packages/container/package/mocha</Project>
-  <Overview>Media server for comics, manga, and BDs with Mihon/Tachiyomi extension runtime and multi-tracker wanted lists.</Overview>
-  <Category>MediaApp:Other</Category>
+  <Support>https://github.com/johagan94/mocha/issues</Support>
+  <Project>https://github.com/johagan94/mocha</Project>
+  <Overview>Media server for comics, manga, and BDs with built-in acquisition, metadata plugins, and tracker scrobbling.</Overview>
+  <Description>
+Mocha is a Komga fork that adds native acquisition workflows, multi-source metadata matching, and two-way read-progress sync with your trackers — no sidecars needed.
+
+[b]Key features:[/b]
+[ul]
+[li]Mihon/Tachiyomi APK extension runtime — download chapters from 2,000+ sources via real APK extensions[/li]
+[li]Wanted List — search across sources, track WANTED → ACQUIRING → ACQUIRED, with library scan integration[/li]
+[li]Multi-tracker import — bulk-import reading lists from AniList, MAL, Kitsu, and MangaUpdates[/li]
+[li]Auto-match — one-click metadata matching against AniList, MangaDex, ComicVine, Metron, MAL, Kitsu, MangaUpdates[/li]
+[li]Two-way scrobbling — push read progress to AniList, MAL, Kitsu, MangaUpdates, Metron; pull back via Provider Sync[/li]
+[li]ComicVine + Metron support for western comic metadata[/li]
+[li]GetComics acquisition for western comics[/li]
+[/ul]
+
+[b]Setup:[/b] Mount your comic/manga library directories, set the WebUI port (default 25600), configure PUID/PGID to match your library permissions, and start the container. The first-run wizard guides you through library creation and plugin configuration. See the README for a full setup walkthrough and metadata provider/extension setup guide.
+  </Description>
+  <Category>MediaApp:Other Books:Comics</Category>
   <WebUI>http://[IP]:[PORT:25600]</WebUI>
   <Icon>https://raw.githubusercontent.com/johagan94/unraid-templates/main/icons/mocha.png</Icon>
-  <ExtraParams>--pids-limit 2048</ExtraParams>
-  <Config Name="WebUI Port" Target="25600" Default="25600" Mode="tcp" Description="Port for the Mocha web UI." Type="Port" Display="always" Required="true" Mask="false">25600</Config>
-  <Config Name="Config Directory" Target="/config" Default="/mnt/user/appdata/mocha" Mode="rw" Description="Config, database, extensions, and logs." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/mocha</Config>
-  <Config Name="Comics Library" Target="/data" Default="/mnt/user/data/comics" Mode="rw" Description="Comic library directory." Type="Path" Display="always" Required="false" Mask="false">/mnt/user/data/comics</Config>
-  <Config Name="Manga Library" Target="/manga" Default="/mnt/user/data/manga" Mode="rw" Description="Manga library directory." Type="Path" Display="always" Required="false" Mask="false">/mnt/user/data/manga</Config>
-  <Config Name="Config Dir Override" Target="MOCHA_CONFIGDIR" Default="/config" Mode="" Description="Mocha config directory." Type="Variable" Display="advanced" Required="false" Mask="false">/config</Config>
-  <Config Name="Scan Exclusions" Target="MOCHA_LIBRARIES_SCAN_DIRECTORY_EXCLUSIONS" Default="#recycle,@eaDir" Mode="" Description="Library scan exclusions." Type="Variable" Display="advanced" Required="false" Mask="false">#recycle,@eaDir</Config>
-  <Config Name="Timezone" Target="TZ" Default="Australia/Brisbane" Mode="" Description="Container timezone." Type="Variable" Display="always" Required="false" Mask="false">Australia/Brisbane</Config>
-  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="User ID for file permissions." Type="Variable" Display="advanced" Required="false" Mask="false">99</Config>
-  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Group ID for file permissions." Type="Variable" Display="advanced" Required="false" Mask="false">100</Config>
+  <ReadMe>https://raw.githubusercontent.com/johagan94/mocha/main/README.md</ReadMe>
   <TemplateURL>https://raw.githubusercontent.com/johagan94/unraid-templates/main/templates/mocha.xml</TemplateURL>
+  <License>MIT</License>
+  <ExtraSearchTerms>komga manga comic reader mihon tachiyomi anilist mal myanimelist kitsu mangadex scrobbler tracker cbz metadata wantedlist automatch getcomics</ExtraSearchTerms>
+  <ExtraParams>--pids-limit 2048</ExtraParams>
+  <DonateText>If you like Mocha, consider supporting the developer</DonateText>
+  <DonateLink>https://github.com/sponsors/johagan94</DonateLink>
+
+  <!-- Ports -->
+  <Config Name="WebUI Port" Target="25600" Default="25600" Mode="tcp" Description="Port for the Mocha web UI" Type="Port" Display="always" Required="true" Mask="false">25600</Config>
+
+  <!-- Paths -->
+  <Config Name="Config Directory" Target="/config" Default="/mnt/user/appdata/mocha" Mode="rw" Description="Config, database, extensions, and logs" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/mocha</Config>
+  <Config Name="Library Root" Target="/mocha" Default="/mnt/user/data/mocha" Mode="rw" Description="Parent directory holding all your library folders (e.g. comics, manga, ecchi, books). Create subfolders here and add each as a library in Settings — adding a new library never needs another mount." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/data/mocha</Config>
+
+  <!-- Environment variables -->
+  <Config Name="Config Dir Override" Target="MOCHA_CONFIGDIR" Default="/config" Mode="" Description="Mocha config directory (advanced — should match the Config Directory path above)" Type="Variable" Display="advanced" Required="false" Mask="false">/config</Config>
+  <Config Name="Scan Exclusions" Target="MOCHA_LIBRARIES_SCAN_DIRECTORY_EXCLUSIONS" Default="#recycle,@eaDir" Mode="" Description="Comma-separated list of directory names to exclude from library scans" Type="Variable" Display="advanced" Required="false" Mask="false">#recycle,@eaDir</Config>
+  <Config Name="Timezone" Target="TZ" Default="Australia/Brisbane" Mode="" Description="Container timezone (e.g. America/New_York, Europe/London)" Type="Variable" Display="always" Required="false" Mask="false">Australia/Brisbane</Config>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="User ID to run Mocha as — must have read/write access to library paths" Type="Variable" Display="advanced" Required="false" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Group ID to run Mocha as" Type="Variable" Display="advanced" Required="false" Mask="false">100</Config>
+  <Config Name="UMASK" Target="UMASK" Default="022" Mode="" Description="Umask for files created by Mocha (e.g. downloaded chapters, CBZ files)" Type="Variable" Display="advanced" Required="false" Mask="false">022</Config>
+
+  <Changes>
+[2026-06-01] v0.2.0 — Beta 2. React/Vite UI rewrite; Wanted List acquisition (Mihon + GetComics); Discover search + covers; Monitor Mode v2; multi-tracker import/scrobble with in-app OAuth; real chapter naming; removed legacy gallery-dl downloader.
+[2026-05-29] Single library-root mount (/mocha) — add libraries as subfolders, no extra Docker mounts. Bulk list import from legacy Suwayomi/Mylar/Kapowarr. Wanted List per-library filter + clickable titles. Async acquisition queue.
+[2026-05-25] v0.1.1 — PUID/PGID non-root support, healthcheck, CI Node.js 24.
+[2026-05-24] v0.1.0 — Initial release. Fork of komga-dev v1.7.0. Package rename (dev.johagan.mocha), GHCR public image (ghcr.io/johagan94/mocha), Mihon/Tachiyomi extension runtime, wanted list acquisition loop (WANTED → ACQUIRING → ACQUIRED), CBZ packaging for downloaded chapters.
+  </Changes>
 </Container>
